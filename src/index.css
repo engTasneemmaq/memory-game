@@ -12,21 +12,59 @@ body{
   justify-content: center;
   align-items: center;
 }
-
-h1{
+.App{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+/* ha animation style  */
+.wrapper {
+  width: 100vw;
   text-align: center;
-  margin-bottom: 1em;
-  color: #fff;
+  margin-bottom: 50;
+}
+  .wrapper span {
+    -webkit-text-stroke-width: 1.25px;
+    -webkit-text-stroke-color: #000;
+    font-size: 30px;
+    text-shadow: 0 0px #F3C623, 0 0px #F2AAAA;
+    transform: translate(0, 100%) rotate(4deg);
+    animation: jump 2s ease-in-out infinite;
+    display: inline-block;
+    font-family: "Titan One", cursive;
+    color: #fff;
+    @for $i from 1 through 7 {
+      &:nth-child(#{$i}) {
+        animation-delay: 120ms * $i;
+      }
+    }
+  }
+@keyframes jump {
+  33% {
+    text-shadow: 0 60px #F37121, 0 150px #F2AAAA;
+  }
+  50% {
+    transform: translate(0, 0) rotate(-4deg);
+    text-shadow: 0 0px #8FC0A9, 0 0px #84A9AC;
+  }
+  66.67% {
+    text-shadow: 0 -60px #D54062, 0 -150px #8FC0A9;
+  }
 }
 .container{
-  height:600px;
+  margin-top: 75px;
+  height:500px;
   width: 600px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
   gap: 1em;
+  border: 2px solid white;
+  border-radius: 15px;
+  padding: 26px;
+    margin-left: -20px;
 }
-
 .card{
   background-color: #fff;
   display: flex;
@@ -60,16 +98,36 @@ h1{
     transform: scale(0);
   }
 }
-
 .card.active{
   transform: rotateY(0);
 }
 .card.correct{
-  background-color: #65e469;
+  background-color: #65E469;
 }
 .card.wrong{
-  background-color: #fd245a;
+  background-color: #FD245A;
 }
 .card.active img{
   transform: scale(1);
+}
+@media only screen and (max-width: 540px){
+  /*Small smartphones [325px -> 425px]*/
+  .container{
+    width: 75%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1em;
+  }
+  .card{
+    width: 100%;
+  }
+  .card img{
+    width: 50px;
+    height: 50px;
+  }
+  .wrapper span {
+    font-size: 25px;
+  }
 }
